@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫码获取原图</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="bg-light">
+    <!-- 顶部导航栏，右侧添加GitHub链接图标 -->
+    <nav class="navbar navbar-light bg-white border-bottom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">图片二维码处理</a>
+            <div>
+                <a href="https://github.com/iselt/qrpicproxy" target="_blank" class="text-decoration-none text-dark">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">上传图片</h1>
+                        <!-- 在这里添加人性化的操作提示文字 -->
+                        <p class="text-muted text-center mb-4">
+                            操作指南：先选择一张您想处理的照片并点击“上传”，耐心等待系统处理。完成后，您将获得一张缩略的带二维码图片。通过扫描该二维码，您可以访问并下载原始图片。
+                        </p>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">选择图片文件</label>
+                                <input type="file" class="form-control" id="file" name="file" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">上传</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                {% if original_url %}
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center">带二维码的图片</h2>
+                        <div class="text-center my-3">
+                            <img src="{{ processed_url }}" alt="带二维码的图片" class="img-fluid border rounded" style="max-width: 100%;">
+                        </div>
+                        <p class="text-center">二维码链接地址：<a href="{{ resource_url }}" target="_blank">{{ resource_url }}</a></p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
